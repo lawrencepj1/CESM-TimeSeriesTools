@@ -1,0 +1,16 @@
+
+# Home Directory. Only need to set this line, queuename and projectcode
+
+homedir="/glade/work/lawrence/worktools/timeseriestools/generatealltimeseriesfiles/"
+
+toolsdir="${homedir}tools/"
+scriptsdir="${homedir}scripts/"
+experimentfiles="${homedir}experimentfiles/"
+experimentgrouphistorylist="${experimentfiles}experimentgrouphistorylist.txt"
+experimentlist="${experimentfiles}experimentlist.txt"
+
+variablefilesdir="${homedir}variablefiles/"
+
+# queuename="develop@desched1"
+queuename="main"
+projectcode="P08010000"

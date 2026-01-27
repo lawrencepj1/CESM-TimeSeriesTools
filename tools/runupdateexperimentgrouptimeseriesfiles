@@ -1,0 +1,40 @@
+#!/usr/bin/bash
+#
+# Created by Peter Lawrence - lawrence@ucar.edu
+# National Center for Atmospheric Research
+# CESM Time Series Generation Tools 1.0
+# Updates Time Series File for an Experiment Group, History File Type, Variable Name, and Experiment Name
+# Over a Time Period that corresponds to 10 Year and Final Time Blocks for the Experiment
+#
+
+
+if [ ${#} -ne 6 ]
+then
+    echo "Usage: runupdateexperimentgrouptimeseriesfiles experimentgroup historyfiletype experiment variablename startyear endyear"
+    exit
+fi
+
+if [ -f ./toolsconfig ]; 
+then
+    source ./toolsconfig
+fi
+
+if [ -f ../toolsconfig ]; 
+then
+    source ../toolsconfig
+fi
+
+experimentgroup=${1}
+historyfiletype=${2}
+variablename=${3}
+experiment=${4}
+startyear=${5}
+endyear=${6}
+
+python ${scriptsdir}updateexperimentgrouptimeseriesfiles.py ${experimentgroup} ${historyfiletype} ${experimentgrouphistorylist} ${experiment} ${experimentlist} ${variablename} ${variablefilesdir} ${startyear} ${endyear}
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+#!/usr/bin/bash
+#
+# Created by Peter Lawrence - lawrence@ucar.edu
+# National Center for Atmospheric Research
+# CESM Time Series Generation Tools 1.0
+# Copy Date Specified (substring) Restart Directories from the Archive to the Timeseries Directories 
+# for an Experiment Group and Experiment Pair
+#
+
+if [ ${#} -ne 3 ]
+then
+    echo "Usage: runcopyrestartsexperimentgrouptimeseriesfiles experimentgroup experiment restartdate"
+    exit
+fi
+
+
+if [ -f ./toolsconfig ]; 
+then
+    source ./toolsconfig
+fi
+
+if [ -f ../toolsconfig ]; 
+then
+    source ../toolsconfig
+fi
+
+experimentgroup=${1}
+experiment=${2}
+restartdate=${3}
+
+python ${scriptsdir}copyrestartsexperimentgrouptimeseriesfiles.py ${experimentgroup} ${experimentgrouphistorylist} ${experiment} ${experimentlist} ${restartdate}
+
+
+
+
+
+

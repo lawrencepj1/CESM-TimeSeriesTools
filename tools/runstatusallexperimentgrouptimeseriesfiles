@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+#
+# Created by Peter Lawrence - lawrence@ucar.edu
+# National Center for Atmospheric Research
+# CESM Time Series Generation Tools 1.0
+# Generates All Status Reports for an Experiment Group and Experiment Name Pair
+#
+
+if [ ${#} -ne 2 ]
+then
+    echo "Usage: runstatusallexperimentgrouptimeseriesfiles experimentgroup experiment"
+    exit
+fi
+
+if [ -f ./toolsconfig ]; 
+then
+    source ./toolsconfig
+fi
+
+if [ -f ../toolsconfig ]; 
+then
+    source ../toolsconfig
+fi
+
+experimentgroup=${1}
+experiment=${2}
+
+statusexperimentgrouptimeseriescommand="${toolsdir}runstatusexperimentgrouptimeseriesfiles"
+statusexperimentgrouprestartcommand="${toolsdir}runstatusexperimentgrouprestartfiles"
+
+python ${scriptsdir}statusallexperimentgrouptimeseriesfiles.py ${experimentgroup} ${experimentgrouphistorylist} ${experiment} ${experimentlist} ${statusexperimentgrouptimeseriescommand} ${statusexperimentgrouprestartcommand}
+
+

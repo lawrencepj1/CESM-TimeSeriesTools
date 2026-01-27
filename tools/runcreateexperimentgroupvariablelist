@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+#
+# Created by Peter Lawrence - lawrence@ucar.edu
+# National Center for Atmospheric Research
+# CESM Time Series Generation Tools 1.0
+# Create the Variable List File for an Experiment Group and History File Type Pair with a Template Experiment
+#
+
+if [ ${#} -ne 3 ]
+then
+    echo "Usage: runcreateexperimentgroupvariablelist experimentgroup historyfiletype experimenttemplate"
+    exit
+fi
+
+if [ -f ./toolsconfig ]; 
+then
+    source ./toolsconfig
+fi
+
+if [ -f ../toolsconfig ]; 
+then
+    source ../toolsconfig
+fi
+
+experimentgroup=${1}
+historyfiletype=${2}
+experimenttemplate=${3}
+
+python ${scriptsdir}createexperimentgroupvariablelist.py ${experimentgroup} ${historyfiletype} ${experimentgrouphistorylist} ${experimenttemplate} ${experimentlist} ${variablefilesdir}
+
+
+
+
+
+

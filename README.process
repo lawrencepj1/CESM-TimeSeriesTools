@@ -1,0 +1,56 @@
+CESM 2.1.5 Time Series Processing Workflow Tools
+
+Created by Peter Lawrence - lawrence@ucar.edu
+National Center for Atmospheric Research
+CESM Analysis Tools 1.0
+
+This is a step by step process to generate all of the timeseries variables for a CESM simulation.
+
+The variable lists only need to be created once for each experiment group and history file type.
+This example is for the ccisens experiment group and the CCIS.BHIST.FinESMFireBVOC.001 simulation.
+
+CCIS.BHIST.FinESMFireBVOC.001 must be defined in the Experiment List File.
+ccisens cam.h0 must be defined in the Experiment Group History List File.
+
+1. Example cam.h0 Timeseries Variable File Set Up:
+
+    First Time Only:
+    ./runcreateexperimentgroupvariablelist ccisens cam.h0 CCIS.BHIST.FinESMFireBVOC.001
+    Edit ../variablelistdata/ccisens/ccisens.cam.h0.variablelist.txt
+    Set TimeIndex, Time, Framework, and Filevalue variable types for All or Global files as needed.
+    Repeat for all history file types (cam.h1 .. pop.h) of the Experiment Group.
+
+2. Generate a Single Timeseries File for Periods a -- z once the Variable File has been finished:
+
+    Single ABSORB Variable Timeseries for cam.h0 for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 1899 10 year periods:
+    ./rungenerateexperimentgrouptimeseriesfiles ccisens cam.h0 ABSORB CCIS.BHIST.FinESMFireBVOC.001 1850 1899
+    ./runupdateexperimentgrouptimeseriesfiles ccisens cam.h0 ABSORB CCIS.BHIST.FinESMFireBVOC.001 1850 1899
+    Alternately submit both commands using qsub with the submit tool.
+    ./runsubmitgenerateexperimentgrouptimeseriesfiles ccisens cam.h0 ABSORB CCIS.BHIST.FinESMFireBVOC.001 1850 1899
+
+3. Generate all Timeseries Variables for an Experiment and Experiment Group History for Periods a -- z:
+
+    All Variables Timeseries files for cam.h0 for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 1899 10 year periods:
+    ./runsubmitgeneratevariablelistexperimentgrouptimeseriesfiles ccisens cam.h0 CCIS.BHIST.FinESMFireBVOC.001 1850 1899
+
+4. Generate all Timeseries Variables for an Experiment and Experiment Group for Periods a -- z:
+
+    All Variables Timeseries files for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 1899 10 year periods:
+    ./runsubmitgenerateallexperimentgrouptimeseriesfiles ccisens CCIS.BHIST.FinESMFireBVOC.001 1850 1899
+    Note Queue and Project are set in the shell script for this tool.
+
+5. Copy all the restart files from the archive to timeseries directory
+
+    All Restart files will be copied from the archive to the timeseries directory for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 2014 10 year periods:
+    ./runcopyrestartsallexperimentgrouptimeseriesfiles ccisens CCIS.BHIST.FinESMFireBVOC.001
+
+5. Check the Status of the Experiment Timeseries Generation:
+
+    All Variable Timeseries files will be checked for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 2014 10 year periods:
+    ./runstatusallexperimentgrouptimeseriesfiles ccisens CCIS.BHIST.FinESMFireBVOC.001
+    This will create a status file for each Experiment Group History type and Restart Files in the top level of the Experiment timeseries directory
+
+7. Clean up all status, submission and log files:
+
+    All Variable Timeseries status, submission and log files will be removed for CCIS.BHIST.FinESMFireBVOC.001 over the 1850 - 2014 10 year periods:
+    ./runcleanallexperimentgrouptimeseriesfiles ccisens CCIS.BHIST.FinESMFireBVOC.001
