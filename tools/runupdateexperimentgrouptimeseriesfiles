@@ -10,7 +10,7 @@
 
 if [ ${#} -ne 6 ]
 then
-    echo "Usage: runupdateexperimentgrouptimeseriesfiles experimentgroup historyfiletype experiment variablename startyear endyear"
+    echo "Usage: runupdateexperimentgrouptimeseriesfiles experimentgroup historyfiletype variablename experiment startyear endyear"
     exit
 fi
 
